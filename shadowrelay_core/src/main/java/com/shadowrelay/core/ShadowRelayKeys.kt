@@ -1,0 +1,15 @@
+package com.shadowrelay.core
+
+import java.security.SecureRandom
+import java.util.Base64
+
+object ShadowRelayKeys {
+    fun generateSharedKey(): String {
+        val bytes = ByteArray(32)
+        SecureRandom().nextBytes(bytes)
+
+        return Base64.getUrlEncoder()
+            .withoutPadding()
+            .encodeToString(bytes)
+    }
+}

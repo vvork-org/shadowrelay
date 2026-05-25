@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ShadowRelay"
+rootProject.name = "MurmurRelay"
 include(":sample")
-include(":shadowrelay_core")
-include(":shadowrelay_firebase")
+include(":murmurrelay_core")
+include(":murmurrelay_firebase")

@@ -1,14 +1,14 @@
-# ShadowRelay
+# MurmurRelay
 
 **Transport-agnostic secure message relay SDK**
 
-ShadowRelay is a lightweight encrypted messaging relay SDK that separates secure message handling from the service used to deliver messages.
+MurmurRelay is a lightweight encrypted messaging relay SDK that separates secure message handling from the service used to deliver messages.
 
 It is designed so apps can encrypt messages locally, send them through a configurable transport layer, and decrypt them only on the receiving device. The transport can be Firebase, WebSockets, a custom backend, or another service.
 
 ## What it does
 
-ShadowRelay handles:
+MurmurRelay handles:
 
 - message wrapping
 - message IDs
@@ -22,28 +22,28 @@ The relay service only moves encrypted payloads. It does not need to understand 
 
 ## Current status
 
-ShadowRelay is currently an Android/Kotlin SDK.
+MurmurRelay is currently an Android/Kotlin SDK.
 
 Future versions may explore support for iOS, web, and additional transport adapters.
 
 ## Project structure
 
 ```text
-ShadowRelay
+MurmurRelay
 ├── sample
-├── shadowrelay_core
-└── shadowrelay_firebase
+├── murmurrelay_core
+└── murmurrelay_firebase
 ```
 
 ## Basic usage
 
 ```kotlin
-val relay = ShadowRelay(
+val relay = MurmurRelay(
     transport = InMemoryRelayTransport()
 )
 
 val channelId = "demo-channel"
-val channelKey = ShadowRelay.createChannelKey()
+val channelKey = MurmurRelay.createChannelKey()
 
 relay.observe(
     channelId = channelId,
@@ -55,25 +55,25 @@ relay.observe(
 relay.send(
     channelId = channelId,
     channelKey = channelKey,
-    payload = "Hello from ShadowRelay"
+    payload = "Hello from MurmurRelay"
 ) { result ->
     when (result) {
-        is ShadowRelayResult.Success -> println("Message sent")
-        is ShadowRelayResult.Error -> println(result.message)
+        is MurmurRelayResult.Success -> println("Message sent")
+        is MurmurRelayResult.Error -> println(result.message)
     }
 }
 ```
 
 ## Transport model
 
-ShadowRelay uses a simple transport interface. A transport is responsible for moving encrypted payloads between devices or clients.
+MurmurRelay uses a simple transport interface. A transport is responsible for moving encrypted payloads between devices or clients.
 
 ```kotlin
 interface RelayTransport {
     fun sendMessage(
         channelId: String,
         encryptedPayload: String,
-        onComplete: (ShadowRelayResult) -> Unit
+        onComplete: (MurmurRelayResult) -> Unit
     )
 
     fun observeMessages(
@@ -87,18 +87,18 @@ This allows the SDK to support different delivery systems without changing the e
 
 ## Included modules
 
-### shadowrelay_core
+### murmurrelay_core
 
 Core SDK logic:
 
-- ShadowRelay
-- ShadowMessage
+- MurmurRelay
+- MurmurMessage
 - encryption and decryption
 - message encoding
 - transport interface
 - in-memory sample transport
 
-### shadowrelay_firebase
+### murmurrelay_firebase
 
 Firebase Realtime Database transport adapter.
 
@@ -106,13 +106,13 @@ Apps using this module should provide their own Firebase project configuration.
 
 ### sample
 
-A small demo app showing how ShadowRelay works using the in-memory sample transport.
+A small demo app showing how MurmurRelay works using the in-memory sample transport.
 
 The sample does not require Firebase.
 
 ## Encryption
 
-ShadowRelay currently uses:
+MurmurRelay currently uses:
 
 - AES-GCM
 - PBKDF2WithHmacSHA256

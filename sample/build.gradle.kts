@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.shadowrelay.lab"
+    namespace = "com.murmurrelay.lab"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.shadowrelay.lab"
+        applicationId = "com.murmurrelay.lab"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
@@ -42,7 +42,7 @@ android {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
-    implementation(project(":shadowrelay_core"))
+    implementation(project(":murmurrelay_core"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

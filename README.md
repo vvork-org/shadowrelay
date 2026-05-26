@@ -6,7 +6,7 @@
 
 MurmurRelay is a lightweight encrypted messaging relay SDK that separates secure message handling from the service used to deliver messages.
 
-It is designed so apps can encrypt messages locally, send them through a configurable transport layer, and decrypt them only on the receiving device. The transport can be Firebase, WebSockets, a custom backend, or another service.
+It is designed so apps can encrypt messages locally, send them through a configurable transport layer, and decrypt them only in clients that have the shared channel key. The transport can be Firebase, WebSockets, a custom backend, or another service.
 
 ## What it does
 
@@ -102,7 +102,7 @@ Core SDK logic:
 
 ### murmurrelay_firebase
 
-Firebase Realtime Database transport adapter.
+Firebase Realtime Database transport adapter for moving encrypted payloads.
 
 Apps using this module should provide their own Firebase project configuration.
 
@@ -113,6 +113,8 @@ A small demo app showing how MurmurRelay works using the in-memory sample transp
 The sample does not require Firebase.
 
 ## Encryption
+
+🟨 MurmurRelay does not currently handle key exchange. Apps are responsible for securely sharing or deriving channel keys.
 
 MurmurRelay currently uses:
 
@@ -134,8 +136,12 @@ Possible future work:
 - key rotation
 - replay protection
 - WebSocket transport
-- iOS or web support
+- Kotlin Multiplatform, iOS, or web support
 - improved background delivery guidance for Android
+- WebSocket transport adapter
+- local network transport adapter
+- custom backend transport examples
+- community-contributed transport adapters
 
 ## License
 
